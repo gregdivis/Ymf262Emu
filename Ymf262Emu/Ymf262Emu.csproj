@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Description>C# port of Java YMF262 OPL2/3 emulator.</Description>
-    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/gregdivis/Ymf262Emu</PackageProjectUrl>
-    <PackageTags>opl2 opl3 ymf262</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Greg Divis</Authors>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp3.1\Ymf262Emu.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\netcoreapp3.1\Ymf262Emu.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<Description>C# port of Java YMF262 OPL2/3 emulator.</Description>
+		<PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/gregdivis/Ymf262Emu</PackageProjectUrl>
+		<PackageTags>opl2 opl3 ymf262</PackageTags>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Greg Divis</Authors>
+		<Version>1.0.1</Version>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DocumentationFile>bin\Debug\netcoreapp3.1\Ymf262Emu.xml</DocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DocumentationFile>bin\Release\netcoreapp3.1\Ymf262Emu.xml</DocumentationFile>
+	</PropertyGroup>
 </Project>

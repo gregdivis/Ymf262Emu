@@ -55,7 +55,17 @@ namespace Ymf262Emu
         public void GetData(Span<short> buffer)
         {
             for (int i = 0; i < buffer.Length; i++)
-                buffer[i] = this.GetNextSample();
+                buffer[i] = (short)(this.GetNextSample() * 32767);
+        }
+        /// <summary>
+        /// Fills <paramref name="buffer"/> with 32-bit mono samples.
+        /// </summary>
+        /// <param name="buffer">Buffer to fill with 32-bit waveform data.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void GetData(Span<float> buffer)
+        {
+            for (int i = 0; i < buffer.Length; i++)
+                buffer[i] = (float)this.GetNextSample();
         }
 
         /// <summary>
@@ -165,7 +175,7 @@ namespace Ymf262Emu
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal double CalculateIncrement(double begin, double end, double period) => (end - begin) / this.SampleRate * (1 / period);
 
-        private short GetNextSample()
+        private double GetNextSample()
         {
             unsafe
             {
@@ -185,15 +195,15 @@ namespace Ymf262Emu
                     }
                 }
 
-                var output = stackalloc short[4];
+                var output = stackalloc double[4];
 
-                const double ratio = (1.0 / 18.0) * short.MaxValue;
+                const double ratio = 1.0 / 18.0;
 
                 // Normalizes the output buffer after all channels have been added,
                 // with a maximum of 18 channels,
                 // and multiplies it to get the 16 bit signed output.
                 for (int i = 0; i < 4; i++)
-                    output[i] = (short)(outputBuffer[i] * ratio);
+                    output[i] = (float)(outputBuffer[i] * ratio);
 
                 // Advances the OPL3-wide vibrato index, which is used by 
                 // PhaseGenerator.getPhase() in each Operator.
@@ -206,7 +216,7 @@ namespace Ymf262Emu
                 if (this.tremoloIndex >= this.tremoloTableLength)
                     this.tremoloIndex = 0;
 
-                return (short)(output[0] + output[1] + output[2] + output[3]);
+                return (float)(output[0] + output[1] + output[2] + output[3]);
             }
         }
 
