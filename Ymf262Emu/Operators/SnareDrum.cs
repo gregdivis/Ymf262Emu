@@ -5,19 +5,9 @@ namespace Ymf262Emu.Operators
     /// <summary>
     /// Emulates the snare drum OPL operator.
     /// </summary>
-    internal sealed class SnareDrum : Operator
+    /// <param name="opl">FmSynthesizer instance which owns the operator.</param>
+    internal sealed class SnareDrum(FmSynthesizer opl) : Operator(0x14, opl)
     {
-        private readonly Random random = new Random();
-
-        /// <summary>
-        /// Initializes a new instance of the SnareDrum operator.
-        /// </summary>
-        /// <param name="opl">FmSynthesizer instance which owns the operator.</param>
-        public SnareDrum(FmSynthesizer opl)
-            : base(0x14, opl)
-        {
-        }
-
         /// <summary>
         /// Returns the current output value of the operator.
         /// </summary>
@@ -36,7 +26,7 @@ namespace Ymf262Emu.Operators
 
             this.phase = this.opl.highHatOperator.phase * 2;
             var operatorOutput = this.GetOutput(modulator, this.phase, waveIndex);
-            var noise = this.random.NextDouble() * this.envelope;
+            var noise = Random.Shared.NextDouble() * this.envelope;
 
             if (operatorOutput / this.envelope != 1 && operatorOutput / this.envelope != -1)
             {
